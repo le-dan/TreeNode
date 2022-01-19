@@ -15,20 +15,13 @@ public class TreeNode {
         this.right = right;
     }
 
-    public static void main(String[] args) {
-        TreeNode test = TreeNodeGenerator(3);
-        BFS(test);
-
-    }
-
-    // use queue to generate tree?
     public static TreeNode TreeNodeGenerator(int depth) {
         TreeNode root = new TreeNode(0);
         int count = 1;
         Queue<TreeNode> qu = new LinkedList<>();
         qu.offer(root);
 
-        while (depth != 0) {
+        while (depth != 1) {
             int size = qu.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = qu.poll();
