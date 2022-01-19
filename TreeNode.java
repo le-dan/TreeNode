@@ -16,13 +16,36 @@ public class TreeNode {
     }
 
     public static void main(String[] args) {
+        TreeNode test = TreeNodeGenerator(3);
+        BFS(test);
 
     }
 
-    public static List<Integer> BFS(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+    // use queue to generate tree?
+    public static TreeNode TreeNodeGenerator(int depth) {
+        TreeNode root = new TreeNode(0);
+        int count = 1;
+        Queue<TreeNode> qu = new LinkedList<>();
+        qu.offer(root);
+
+        while (depth != 0) {
+            int size = qu.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = qu.poll();
+                node.left = new TreeNode(count++);
+                node.right = new TreeNode(count++);
+                qu.offer(node.left);
+                qu.offer(node.right);
+            }
+            depth--;
+        }
+
+        return root;
+    }
+
+    public static void BFS(TreeNode root) {
         if (root == null) {
-            return list;
+            return;
         }
 
         Queue<TreeNode> qu = new LinkedList<>();
@@ -32,7 +55,7 @@ public class TreeNode {
             int size = qu.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = qu.poll();
-                list.add(node.val);
+                System.out.print(node.val + " ");
 
                 if (node.left != null) {
                     qu.offer(node.left);
@@ -43,8 +66,7 @@ public class TreeNode {
                 }
 
             }
+            System.out.println();
         }
-
-        return list;
     }
 }
